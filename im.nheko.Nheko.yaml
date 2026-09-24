@@ -176,10 +176,10 @@ modules:
     config-opts:
       - -Ddefault_library=static
     sources:
-      - commit: 1c3a9029581a08749874226b68bb40c196ed21bb
-        tag: v0.3.2
-        type: git
-        url: https://nheko.im/nheko-reborn/coeurl.git
+      # Kept in-tree because the canonical nheko.im GitLab is unreliable.
+      # See third_party/README.md for the preserved upstream revision.
+      - path: third_party/coeurl
+        type: dir
   - name: mtxclient
     config-opts:
       - -DBUILD_LIB_TESTS=OFF
@@ -204,7 +204,10 @@ modules:
       - path: .
         type: dir
         skip:
+          - .upstream-mirrors
           - build-flatpak
+          - flatpak-repo
+          - nheko-local.flatpak
       - dest: .deps/lmdbxx
         sha256: 5e12eb3aefe9050068af7df2c663edabc977ef34c9e7ba7b9d2c43e0ad47d8df
         type: archive

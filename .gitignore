@@ -120,6 +120,9 @@ compile_commands.json
 # Artifacts
 *.rpm
 *.deb
+/*.flatpak
+/flatpak-repo/
+/.upstream-mirrors/
 package.dir
 
 # Dependencies

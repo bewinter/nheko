@@ -427,6 +427,57 @@ cmake --build build --config Release
 
 Adapt the USE_BUNDLED_* as needed.
 
+To build with the same KDE runtime and bundled dependencies as the Flatpak,
+install `flatpak-builder` and run:
+
+```bash
+./scripts/build-local-flatpak.sh
+./scripts/install-local-flatpak.sh
+```
+
+The first script creates `nheko-local.flatpak`; the second installs it for the
+current user on the `local` branch. Launch it with:
+
+```bash
+flatpak run --branch=local im.nheko.Nheko
+```
+
+The equivalent manual build commands are:
+
+```bash
+flatpak remote-add --user --if-not-exists flathub \
+  https://flathub.org/repo/flathub.flatpakrepo
+flatpak-builder --force-clean --user --install-deps-from=flathub \
+  --disable-updates --repo=flatpak-repo --default-branch=local \
+  build-flatpak im.nheko.Nheko.yaml
+flatpak build-bundle \
+  --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo \
+  flatpak-repo nheko-local.flatpak im.nheko.Nheko local
+```
+
+You can smoke-test the resulting application directly from the build directory:
+
+```bash
+flatpak-builder --run build-flatpak im.nheko.Nheko.yaml \
+  /app/bin/im.nheko.Nheko --version
+```
+
+The coeurl version required by Nheko is preserved in `third_party/coeurl`.
+This makes both the Flatpak build and `-DUSE_BUNDLED_COEURL=ON` independent of
+the original `nheko.im` GitLab. Its original revision and license are recorded
+in `third_party/README.md`.
+
+To make portable backups of this checkout and the dependency repositories that
+flatpak-builder has already downloaded, run:
+
+```bash
+./scripts/preserve-upstreams.sh
+```
+
+The command writes verified Git bundles, or complete source archives where the
+cache contains only a shallow revision, to `.upstream-mirrors/`. Copy that
+directory to separate storage; it is intentionally not committed.
+
 If the build fails with the following error
 ```
 Could not find a package configuration file provided by "Qt6Widgets" with

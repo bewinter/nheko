@@ -1,0 +1,7 @@
+[wrap-file]
+directory = libevent-a994a52d5373d6284b27576efa617aff2baa7bd3
+
+source_url = https://github.com/hunter-packages/libevent/archive/a994a52d5373d6284b27576efa617aff2baa7bd3.tar.gz
+source_filename = libevent-2.2.0-a994a52d5373d6284b27576efa617aff2baa7bd3.tar.gz
+source_hash = 114d2e4f030539b154ef0e7d2398c0ad40d0ba484a74833aac9486cc4088da13
+

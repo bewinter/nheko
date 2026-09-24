@@ -116,7 +116,7 @@ include(GNUInstallDirs)
 
 set(CPACK_PACKAGE_VERSION_MAJOR "0")
 set(CPACK_PACKAGE_VERSION_MINOR "12")
-set(CPACK_PACKAGE_VERSION_PATCH "1")
+set(CPACK_PACKAGE_VERSION_PATCH "2")
 set(PROJECT_VERSION_MAJOR ${CPACK_PACKAGE_VERSION_MAJOR})
 set(PROJECT_VERSION_MINOR ${CPACK_PACKAGE_VERSION_MINOR})
 set(PROJECT_VERSION_PATCH ${CPACK_PACKAGE_VERSION_PATCH})
@@ -202,8 +202,7 @@ if(USE_BUNDLED_COEURL)
     include(FetchContent)
     FetchContent_Declare(
         coeurl
-        GIT_REPOSITORY https://nheko.im/Nheko-Reborn/coeurl.git
-        GIT_TAG        v0.3.2
+        SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/third_party/coeurl"
     )
     FetchContent_MakeAvailable(coeurl)
     set(COEURL_TARGET_NAME coeurl::coeurl)

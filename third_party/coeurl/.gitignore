@@ -1,0 +1,14 @@
+/build*/
+/generated-docs/
+.cache/
+.ccls-cache/
+.exrc
+compile_commands.json
+/subprojects/packagecache
+/subprojects/doctest-*
+/subprojects/libevent-*/
+/subprojects/spdlog-*/
+/subprojects/curl-*/
+/subprojects/fmt-*/
+/subprojects/packagecache/
+/*.pem

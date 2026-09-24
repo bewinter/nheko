@@ -355,6 +355,9 @@ build-flatpak:
     - mkdir -p build-flatpak
     - cd build-flatpak
     - flatpak-builder --arch=${AARCH} --install-deps-from=flathub --user --disable-rofiles-fuse --ccache --repo=repo --default-branch=${CI_COMMIT_REF_NAME//\//_} --subject="Build of Nheko ${VERSION} `date` for ${ARCH}" app ../im.nheko.Nheko.yaml --jobs=$JOBS
+    # Loading the executable catches missing libraries and runtime incompatibilities
+    # that a successful compile/link alone would not detect.
+    - if [ "${ARCH}" = "amd64" ]; then flatpak-builder --run app ../im.nheko.Nheko.yaml env QT_QPA_PLATFORM=offscreen /app/bin/im.nheko.Nheko --version; fi
     - flatpak install --user -y flathub org.flatpak.Builder
     - flatpak run --command=flatpak-builder-lint org.flatpak.Builder appstream app/files/share/app-info/xmls/im.nheko.Nheko.xml.gz
     - flatpak --arch=${AARCH} build-bundle repo nheko-${ARCH}.flatpak im.nheko.Nheko ${CI_COMMIT_REF_NAME//\//_}
